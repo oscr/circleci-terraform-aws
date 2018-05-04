@@ -2,12 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: debian:stretch
+      - image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: INIT
+          command: terraform init -input=false
       - run:
-          name: Print the Current Time
-          command: date
+          name: PLAN
+          command: terraform plan -out=tfplan -input=false
+      - run:
+          name: APPLY
+          command: terraform apply -input=false tfplan
