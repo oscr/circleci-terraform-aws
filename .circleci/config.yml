@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: hashicorp/terraform:light
+    environment:
+          DB_PASSWORD: {{ .Environment.DB_PASSWORD }}
     steps:
       - checkout
       - run:
@@ -10,7 +12,7 @@ jobs:
           command: terraform init -input=false
       - run:
           name: PLAN
-          command: terraform plan -out=tfplan -input=false -var 'db_password={{ .Environment.DB_PASSWORD }}'
+          command: terraform plan -out=tfplan -input=false -var 'db_password=$DB_PASSWORD'
       - run:
           name: APPLY
           command: terraform apply -input=false tfplan
