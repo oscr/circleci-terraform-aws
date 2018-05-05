@@ -10,7 +10,7 @@ jobs:
           command: terraform init -input=false
       - run:
           name: PLAN
-          command: terraform plan -out=tfplan -input=false
+          command: terraform plan -out=tfplan -input=false -var 'db_password={{ .Environment.DB_PASSWORD }}'
       - run:
           name: APPLY
           command: terraform apply -input=false tfplan
