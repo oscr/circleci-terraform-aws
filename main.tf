@@ -1,17 +1,21 @@
+variable "table-name" {
+  default = "eatit-table"
+}
+
+variable "region" {
+  default = "eu-central-1"
+}
+
 provider "aws" {
-  region = "eu-west-1"
+  region = "${var.region}"
 }
 
 terraform {
   backend "s3" {
     bucket = "circle-terraform-state"
     key    = "terraform.tfstate"
-    region = "eu-west-1"
+    region = "${var.region}"
   }
-}
-
-variable "table-name" {
-  default = "eatit-table"
 }
 
 resource "aws_dynamodb_table" "eatit-table" {
