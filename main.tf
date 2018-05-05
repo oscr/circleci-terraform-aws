@@ -10,9 +10,22 @@ terraform {
   }
 }
 
-resource "aws_vpc" "minimal" {
-  cidr_block = "10.0.0.0/16"
+variable "table-name" {
+  default = "eatit-table"
+}
+
+resource "aws_dynamodb_table" "eatit-table" {
+  name           = "${var.table-name}"
+  read_capacity  = 5
+  write_capacity = 5
+  hash_key       = "EventId"
+
+  attribute {
+    name = "EventId"
+    type = "S"
+  }
+
   tags {
-    Name = "minimal"
+    Project = "eatit"
   }
 }
