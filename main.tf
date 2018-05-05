@@ -14,7 +14,7 @@ terraform {
   backend "s3" {
     bucket = "circle-terraform-state"
     key    = "terraform.tfstate"
-    region = "${var.region}"
+    region = "eu-west-1"
   }
 }
 
