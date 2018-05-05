@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: hashicorp/terraform:light
     environment:
-          DB_PASSWORD: {{ .Environment.DB_PASSWORD }}
+      DB_PASSWORD: {{ .Environment.DB_PASSWORD }}
     steps:
       - checkout
       - run:
