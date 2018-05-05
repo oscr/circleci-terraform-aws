@@ -3,9 +3,7 @@ jobs:
   build:
     docker:
       - image: hashicorp/terraform:light
-    environment:
-      DB_PASSWORD: {{ .Environment.DB_PASSWORD }}
-    steps:
+    ssteps:
       - checkout
       - run:
           name: INIT
