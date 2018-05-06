@@ -11,10 +11,10 @@ jobs:
       - checkout
       - run:
           name: INIT
-          command: terraform init -input=false -backend-config="key="{{ .Branch }}
+          command: terraform init -input=false -backend-config='key='${CIRCLE_BRANCH}
       - run:
           name: PLAN
-          command: terraform plan -out=tfplan -input=false -var 'environment='{{ .Branch }}
+          command: terraform plan -out=tfplan -input=false -var 'environment='${CIRCLE_BRANCH}
       - run:
           name: APPLY
           command: terraform apply -input=false tfplan
