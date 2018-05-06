@@ -6,7 +6,7 @@ variable "region" {
   default = "eu-central-1"
 }
 
-variable "db_password" {}
+variable "environment" {}
 
 provider "aws" {
   region = "${var.region}"
@@ -21,7 +21,7 @@ terraform {
 }
 
 resource "aws_dynamodb_table" "eatit-table" {
-  name           = "${var.table-name}"
+  name           = "${var.table-name}-${var.environment}"
   read_capacity  = 5
   write_capacity = 5
   hash_key       = "EventId"
@@ -33,12 +33,5 @@ resource "aws_dynamodb_table" "eatit-table" {
 
   tags {
     Project = "eatit"
-  }
-}
-
-resource "aws_vpc" "minimal" {
-  cidr_block = "10.0.0.0/16"
-  tags {
-    Name = "${var.db_password}"
   }
 }

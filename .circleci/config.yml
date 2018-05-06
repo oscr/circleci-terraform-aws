@@ -1,16 +1,20 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - master
+        - develop
     docker:
       - image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
           name: INIT
-          command: terraform init -input=false
+          command: terraform init -input=false -backend-config="key="{{ .Branch }}
       - run:
           name: PLAN
-          command: terraform plan -out=tfplan -input=false -var 'db_password='${DB_PASSWORD}
+          command: terraform plan -out=tfplan -input=false -var 'environment='{{ .Branch }}
       - run:
           name: APPLY
           command: terraform apply -input=false tfplan
