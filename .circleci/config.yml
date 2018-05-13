@@ -11,10 +11,19 @@ jobs:
       - checkout
       - run:
           name: INIT
-          command: terraform init -input=false -backend-config='key='${CIRCLE_BRANCH}
+          command: >
+            terraform init
+            -input=false
+            -backend-config='key='${CIRCLE_BRANCH}
       - run:
           name: PLAN
-          command: terraform plan -out=tfplan -input=false -var 'environment='${CIRCLE_BRANCH}
+          command: >
+            terraform plan
+            -out=tfplan
+            -input=false
+            -var 'environment='${CIRCLE_BRANCH}
       - run:
           name: APPLY
-          command: terraform apply -input=false tfplan
+          command: >
+            terraform apply
+            -input=false tfplan
