@@ -22,8 +22,8 @@ terraform {
 
 resource "aws_dynamodb_table" "eatit-table" {
   name           = "${var.table-name}-${var.environment}"
-  read_capacity  = 2
-  write_capacity = 2
+  read_capacity  = 1
+  write_capacity = 1
   hash_key       = "EventId"
 
   attribute {
